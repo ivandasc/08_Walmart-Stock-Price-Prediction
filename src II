@@ -1,0 +1,82 @@
+importar  pandas  como  pd 
+importar  numpy  como  np 
+importar  matplotlib.pyplot  como  plt 
+de  statsmodels.tsa.arima.model  importar  ARIMA 
+de  sklearn.metrics  importar  mean_squared_error 
+de  math  importar  sqrt 
+importar  gdown
+
+# Baixar o arquivo CSV do Google Drive 
+url  =  'https://drive.google.com/uc?id=107u-JA1gW_B7-HC3rymYunkczT7NQmTt' 
+output  =  'WMT.csv' 
+gdown . download ( url ,  output ,  quiet = False )
+
+# Carregamento e Pré-processamento de Dados 
+print ( "Carregando dados do arquivo CSV 'WMT.csv'..." ) 
+df  =  pd . read_csv ( 'WMT.csv' ) 
+print ( "Convertendo a coluna 'Data' para formato datetime..." ) 
+df [ 'Data' ]  =  pd . to_datetime ( df [ 'Data' ]) 
+df . set_index ( 'Date' ,  inplace = True ) 
+print ( "Reamostrando os dados para frequência diária..." ) 
+df  =  df . reamostrar ( 'D' ) . significar ()
+
+# Visualização dos Dados 
+plt . figura ( figsize = ( 10 ,  6 )) 
+plt . plot ( df . index ,  df [ 'Fechar' ],  label = 'Preço de Fechamento' ) 
+plt . title ( 'Preços das Ações da Walmart' ) 
+plt . xlabel ( 'Dados' ) 
+plt . ylabel ( 'Preço de Fechamento' ) 
+plt . legenda () 
+plt . mostrar ()
+
+# Divisão dos Dados em Treinamento e Teste 
+print ( "Dividindo os dados em conjuntos de treinamento (80%) e teste (20%)..." ) 
+train_size  =  int ( len ( df )  *  0.8 ) 
+train_data ,  test_data  =  df . iloc [: train_size ],  df . iloc [ train_size :] 
+print ( f "Conjunto de Treinamento: { len ( train_data ) } amostras" ) 
+print ( f "Conjunto de Teste: { len ( test_data ) } amostras" )
+
+# Treinamento do Modelo ARIMA 
+print ( "Treinando o modelo ARIMA com ordem (5, 1, 0)..." ) model = 
+ARIMA  (  train_data [ ' Fechar ' ],  order = ( 5 , 1 , 0 )) try : # Verificando valores ausentes na coluna 'Close' if df [ 'Close' ] . é nulo () . sum () > 0 : print ( "Aviso: Valores ausentes encontrados na coluna 'Fechar'. Considere técnicas de imputação." ) model_fit = model . fit () exceto pd . API . tipos .鋳造异常as e : print ( f "Erro durante o ajuste do modelo ARIMA: { e } " ) raise  
+
+# Fazendo Previsões e Calculando o RMSE 
+print ( "Fazendo variações para o conjunto de teste..." ) 
+previsions  =  model_fit . previsão ( etapas = len ( dados_teste )) 
+valores_previstos  =  previsões
+
+print ( "Calculando o erro RMSE..." ) 
+try : 
+    rmse  =  sqrt ( mean_squared_error ( test_data [ 'Fechar' ],  valores_previstos )) 
+    print ( f "RMSE: { rmse } " ) 
+exceto  ValueError  as  e : 
+    if  'NaN'  in  str ( e ): 
+        print ( "Erro: A entrada contém valores NaN. Verifique o tratamento de dados ausentes ou possíveis problemas durante a previsão." ) 
+    elif  'infinity'  in  str ( e ): 
+        print ( "Erro: A entrada contém infinitos valores. Investigar possíveis outliers ou transformações nos dados." ) 
+    else : 
+        print ( f "Erro inesperado: { e } " )
+
+# Visualização das Previsões 
+plt . figura ( figsize = ( 10 ,  6 )) 
+plt . plot ( test_data . index ,  test_data [ 'Fechar' ],  label = 'Preço Real' ) 
+plt . plot ( test_data . index ,  predict_values ​​,  color = 'red' ,  label = 'Preço Prévisto' ) 
+plt . title ( 'Previsão de Preços das Ações do Walmart' ) 
+plt . xlabel ( 'Dados' ) 
+plt . ylabel ( 'Preço de Fechamento' ) 
+plt . legenda () 
+plt . mostrar ()
+
+# Insights Adicionais com Observações sobre Investimento: 
+print ( " \n " ) 
+print ( "Insights Adicionais com Observações sobre Investimento:" ) 
+print ( " \n " ) 
+print ( "Tendência Geral:" ) 
+print ( " \n " ) 
+print ( "Os gráficos de preços das ações do Walmart mostram uma tendência geral de crescimento gradual, queda moderada, estabilização com leves oscilações." ) 
+print ( " \n " ) 
+print ( "Exemplo de Descrições para Diferentes Tendências:" ) 
+print ( " \n " ) 
+print ( "Crescimento Gradual: O gráfico mostra uma tendência de crescimento gradual nos preços das ações do Walmart ao longo do período analisado, com leves flutuações." ) 
+print ( "Queda Moderada: O gráfico indica uma tendência de queda moderada nos preços das ações do Walmart, com alguns períodos de estabilização ou leve recuperação." ) 
+print ( "Estabilização com Leves Oscilações: Os preços das ações do Walmart se estabilizaram em torno de um determinado nível, com níveis oscilações para cima e para baixo, diminuiu um período de estabilidade relativa no mercado." )
