@@ -1,20 +1,20 @@
-Previsão de Preços das Ações do Walmart
-Descrição do Projeto
+## Previsão de Preços das Ações do Walmart
+### Descrição do Projeto
 Neste projeto, realizamos uma análise de séries temporais para prever os preços futuros das ações do Walmart com base em dados históricos. Utilizamos técnicas de aprendizado de máquina, como ARIMA (AutoRegressive Integrated Moving Average) e métodos adicionais para análise, com o objetivo de identificar padrões e tendências ao longo do tempo e estimar preços futuros.
 
-Objetivos
+### Objetivos
 Análise Exploratória: Identificar padrões e tendências nos preços históricos das ações do Walmart.
 Modelagem: Construir um modelo ARIMA para prever os preços futuros com base em dados históricos.
 Avaliação: Medir a precisão do modelo usando métricas de erro como o RMSE (Root Mean Squared Error).
 Visualização: Criar gráficos para visualizar dados históricos, previsões e análises.
-Bibliotecas Utilizadas
+### Bibliotecas Utilizadas
 pandas: Manipulação e análise de dados.
 matplotlib: Visualização de dados.
 seaborn: Gráficos estatísticos.
 statsmodels: Modelagem de séries temporais com ARIMA.
 sklearn: Métricas de avaliação de modelos.
 gdown: Download de arquivos do Google Drive.
-Instalação
+### Instalação
 Para executar este projeto, você precisará das seguintes bibliotecas Python. Você pode instalá-las usando pip:
 pip install pandas matplotlib seaborn statsmodels scikit-learn gdown
 Como Utilizar
